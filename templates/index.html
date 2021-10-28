@@ -79,54 +79,28 @@
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
           <div class="col-lg-8 mt-5 mt-lg-0">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="/" method="POST">
               <div class="row">
                 <h2 class="text-center">Rekomendasi</h2>
                 <div class="col-md-6 form-group">
-                  <h4>Fold</h4>
-                  <select name="fold" id="fold" class="form-select">
-                    <option value="3">3</option>
-                    <option value="5">5</option>
-                    <option value="7">7</option>
-                    <option value="9">9</option>
-                  </select>
-                </div>
-                <div class="col-md-6 form-group">
                   <h4>User Target</h4>
                   <select name="User_Target" id="User_Target" class="form-select">
-                    <option value="3">2594</option>
-                    <option value="5">3694</option>
-                    <option value="7">4494</option>
-                    <option value="9">5592</option>
+                    {% for i in user %}
+                    <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
                   </select>
                 </div>
                 <div class="col-md-6 form-group">
                   <h4>Top-N</h4>
                   <select name="Top_N" id="Top_N" class="form-select">
-                    <option value="3">45</option>
-                    <option value="5">90</option>
-                    <option value="7">135</option>
-                    <option value="9">180</option>
+                    {% for j in topN %}
+                    <option value="{{j}}">{{j}}</option>
+                    {% endfor %}
                   </select>
+                  <input type="submit" value="Submit" class="btn btn-primary"></div>
                 </div>
-                <div><button type="submit">Tampilkan Rekomendasi</button></div>
-              </div>
-              <div class="row">
-                <h2 class="text-center">Evaluasi</h2>
-                <h4>Evaluasi Peruser</h4>
-                <div class="col-md-6 form-group">
-                  <h4>Precision</h4>
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Precision...">
-                </div>
-                <div class="col-md-6 form-group">
-                  <h4>NDCG</h4>
-                  <input type="email" class="form-control" name="email" id="email" placeholder="NDCG...">
-                </div>
-              </div>
             </form>
-
           </div>
-
         </div>
 
       </div>
@@ -164,9 +138,9 @@
                 <p>Irisan Rekom & Test</p>
               </div>
             </div>
-  
+            <a href="/result">Hasil</a>
           </div>
-  
+
         </div>
       </section><!-- End Counts Section -->
   
