@@ -1652,3 +1652,15 @@ section {
   color: #fff;
   text-decoration: none;
 }
+
+.math {
+  display: inline-block;
+}
+.math .smol {
+  font-size: 0.9em;
+  height: 0.9em;
+}
+.math .big {
+  font-size: 1.4em;
+  height: 1.4em;
+}

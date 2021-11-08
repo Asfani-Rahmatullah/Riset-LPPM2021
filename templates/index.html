@@ -42,7 +42,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="#">Judul</a></h1>
+      <h1 class="logo"><a href="#">Trunojoyoan</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -63,8 +63,9 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
-          <h1>Sistem Rekomendasi Hotel Multi-Kriteria</h1>
-          <h2>Lorem ipsum dolor sit amet consectetur.</h2>
+          <h1>Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1>
+          <h2>Aplikasi ini adalah prototipe yang mensimulasikan kerja dan analisa dari sistem rekomendasi. Pengguna aplikasi dapat memilih dari kedua metode yang disediakan di dalam sistem untuk menghasilkan Top-N daftar rekomendasi bagi target <i> user.</i> Daftar rekomendasi diperoleh berdasarkan model metode yang dibangun menggunakan Data Latih dari dataset Rating Multi-kriteria Hotel.
+            </h2>
         </div>
       </div>
       <div class="text-center">
@@ -74,110 +75,80 @@
   </section><!-- End Hero -->
 
   <main id="main">
-  
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
-          <div class="col-lg-8 mt-5 mt-lg-0">
-            <form action="/" method="POST">
-              <div class="row">
-                <h2 class="text-center">Rekomendasi</h2>
-                <div class="col-md-6 form-group">
-                  <h4>User Target</h4>
-                  <select name="User_Target" id="User_Target" class="form-select">
-                    {% for i in user %}
-                    <option value="{{i}}">{{i}}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-                <div class="col-md-6 form-group">
-                  <h4>Top-N</h4>
-                  <select name="Top_N" id="Top_N" class="form-select">
-                    {% for j in topN %}
-                    <option value="{{j}}">{{j}}</option>
-                    {% endfor %}
-                  </select>
-                  <input type="submit" value="Submit" class="btn btn-primary"></div>
-                </div>
-            </form>
-          </div>
-        </div>
 
-      </div>
-    </section><!-- End Contact Section -->
-      <!-- ======= Counts Section ======= -->
-      <section id="counts" class="counts section-bg">
-        <div class="container">
-  
-          <div class="row justify-content-end">
-  
-            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-              <div class="count-box">
-                <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="2" class="purecounter"></span>
-                <p>Data Training</p>
-              </div>
-            </div>
-  
-            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-              <div class="count-box">
-                <span data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="2" class="purecounter"></span>
-                <p>Rekomendasi</p>
-              </div>
-            </div>
-  
-            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-              <div class="count-box">
-                <span data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2" class="purecounter"></span>
-                <p>Data Test</p>
-              </div>
-            </div>
-  
-            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-              <div class="count-box">
-                <span data-purecounter-start="0" data-purecounter-end="1" data-purecounter-duration="2" class="purecounter"></span>
-                <p>Irisan Rekom & Test</p>
-              </div>
-            </div>
-            <a href="/result">Hasil</a>
-          </div>
-
-        </div>
-      </section><!-- End Counts Section -->
-  
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    <!-- ======= Services Section ======= -->
+    <section id="contact" class="services section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>About Us</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. </p>
+          <h2>METODE</h2>
+          <h5>Pilih metode yang anda perlukan.</h5>
         </div>
 
-        <div class="row content">
-          <div class="col-lg-6">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-            </ul>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex mx-auto mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box iconbox-pink">
+              <div class="icon">
+                <img src="/static/assets/img/user.png" alt="User" class="w-50">
+              </div>
+              <h4><a href="">Min-Max User-Based</a></h4>
+              <p>Metode Sistem Rekomendasi berbasis Multi-Kriteria yang menerapkan Teknik Normalisasi MinMax dalam Pendekatan <i>User-based Collaborative Filtering</i>
+                </p><br>
+              <form action="/" method="POST">
+                <input type="hidden" name="next" value="pilih">
+                <input type="hidden" name="menu" value="10">
+                <input type="hidden" name="metode" value="Min-Max User-Based">
+                <input type="submit" value="Pilih" class="btn btn-primary">
+              </form>
+            </div>
           </div>
-          <div class="col-lg-6 pt-4 pt-lg-0">
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <a href="#" class="btn-learn-more">Learn More</a>
-          </div>
-        </div>
 
+          <div class="col-lg-4 col-md-6 d-flex mx-auto mt-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box iconbox-yellow">
+              <div class="icon">
+                <img src="/static/assets/img/item.png" alt="Item" class="w-50">
+              </div>
+              <h4><a href="">Min-Max Item-Based</a></h4>
+              <p>Metode Sistem Rekomendasi berbasis Multi-Kriteria yang menerapkan Teknik Normalisasi MinMax dalam Pendekatan<i> Item-based Collaborative Filtering</i></p><br>
+              <form action="/" method="POST">
+                <input type="hidden" name="next" value="pilih">
+                <input type="hidden" name="menu" value="11">
+                <input type="hidden" name="metode" value="Min-Max Item-Based">
+                <input type="hidden" name="penulis" value="Min-Max Item-Based">
+                <input type="submit" value="Pilih" class="btn btn-primary">
+              </form>
+            </div>
+          </div>
+
+        </div>
       </div>
-    </section><!-- End About Section -->
+    </section><!-- End Sevices Section -->
   </main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Trunojoyoan</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
+          Designed by <a href="https://bootstrapmade.com/">Trunojoyoan Team</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
 
 
   <div id="preloader"></div>

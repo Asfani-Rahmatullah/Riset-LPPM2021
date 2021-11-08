@@ -3,6 +3,7 @@ import sys
 import joblib
 import pandas as pd
 import numpy as np
+from werkzeug.datastructures import IfRange
 import xlrd
 import math
 from flask import Flask, render_template, request, redirect, url_for
@@ -33,19 +34,14 @@ class Main2():
                     index += 1
             Full_Data_Excel.append(Data_Excel)
         return Full_Data_Excel
-    def load_Detail(self, DataKe):
+    def load_Detail(self, Menu):
         DataRekom_Usulan = []
         DataTest = []
         print("Proses Memuat Data Rekomendasi dan Testing")
-        DataRekom_Usulan.append(joblib.load("Dataset1/TopN_M10_1.sav"))
-        DataTest.append(joblib.load("Dataset1/Testing1.sav"))
-
-        if(DataKe == 1):
-            NamaItem = joblib.load("Dataset1/NamaItem.sav")
-        elif(DataKe == 2):
-            NamaItem = [[], [], []]
-            NamaItem[2] = ["Restoran ID-"+str(i+1) for i in range(131)]
-
+        DataRekom_Usulan.append(joblib.load("Dataset1/TopN_M"+str(Menu)+"_3.sav"))
+        DataTest.append(joblib.load("Dataset1/Testing3.sav"))
+        NamaItem = joblib.load("Dataset1/NamaItem.sav")
+        
         return DataRekom_Usulan, DataTest, NamaItem
 
 
@@ -91,24 +87,24 @@ class Main3():
         print("lw_rekom")
         for i in range(TopN):
             NamaHotel = int(self.DataRekom[Fold][Target_User][i])
-            Hasil_rekom.append(str(NamaHotel+1)+". "+self.NamaItem[2][NamaHotel]) #Ubah disini
+            Hasil_rekom.append(self.NamaItem[2][NamaHotel] + "(ID: " + str(NamaHotel+1)+ ")") #Ubah disini
             Rekom_Eval.append(self.DataRekom[Fold][Target_User][i]) #untuk perhitungan evaluasi
         print("lw_test")
         for i in range(len(self.DataTest[Fold][Target_User])):
             NamaHotel = int(self.DataTest[Fold][Target_User][i])
-            Hasil_test.append(str(NamaHotel+1)+". "+self.NamaItem[2][NamaHotel])
+            Hasil_test.append(self.NamaItem[2][NamaHotel] + "(ID: " + str(NamaHotel+1)+ ")")
             Test_Eval.append(self.DataTest[Fold][Target_User][i])
         print("lw_pelatihan")
         data_pelatihan = np.setdiff1d(Full_Item, self.DataRekom[Fold][Target_User])
         for i in range(len(data_pelatihan)):
             NamaHotel = data_pelatihan[i]
-            Hasil_pelatihan.append(str(NamaHotel+1)+". "+self.NamaItem[2][NamaHotel])
+            Hasil_pelatihan.append(self.NamaItem[2][NamaHotel]+ "(ID: " + str(NamaHotel+1)+ ")")
         print("lw_irisan")
         Jumlah_Irisan = 0
         for i in range(TopN):
             if(Rekom_Eval[i] in Test_Eval):
                 NamaHotel = int(Rekom_Eval[i])
-                Hasil_irisan.append(str(NamaHotel+1)+". "+self.NamaItem[2][NamaHotel])
+                Hasil_irisan.append(self.NamaItem[2][NamaHotel] + "(ID: " + str(NamaHotel+1)+ ")")
                 Jumlah_Irisan = Jumlah_Irisan+1
 
         print("sukses")
@@ -127,19 +123,6 @@ class Main3():
         print("nilai_NDCG", nilai_NDCG)
 
         return Hasil_irisan, Hasil_pelatihan, Hasil_rekom, Hasil_test, nilai_AP, nilai_DCG, nilai_F1Score, nilai_NDCG, nilai_Recall, nilai_Precision
-##
-##        self.ui.label_rekom.setText("Rekomendasi ("+str(len(Rekom_Eval))+" Item)")
-##        self.ui.label_test.setText("Data Test ("+str(len(Test_Eval))+" Item)")
-##        self.ui.label_training.setText("Data Training ("+str(len(data_pelatihan))+" Item)")
-##        self.ui.label_irisan.setText("Irisan Rekom & Test("+str(Jumlah_Irisan)+" Item)")
-##
-##        self.ui.l_pre3.setText(str(nilai_Precision[TopN-1])[:7])
-##        self.ui.l_rec3.setText(str(nilai_Recall[TopN-1])[:7])
-##        self.ui.l_f1s3.setText(str(nilai_F1Score)[:7])
-##        self.ui.l_ap3.setText(str(nilai_AP)[:7])
-##        self.ui.l_dcg3.setText(str(nilai_DCG[TopN-1])[:7])
-##        self.ui.l_ndcg3.setText(str(nilai_NDCG)[:7])
-        #self.ui.label_hasil1.setText("Hasil : Fold "+str(Fold+1)+", User "+str(Target_User+1)+", TopN "+str(TopN))
 
     def Precision(self, indek_topN, Tes, N):
         temp = 0
@@ -208,24 +191,53 @@ class Main3():
 
 pre1 = Main2()
 Detail_Data_Training, Detail_Data_Test, NamaItem = pre1.load_Detail(1)
-prepare = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, 2, 2)
-user, topNp = prepare.data_userTopN()
+
+
 
 @app.route("/",methods=['GET','POST'])
 def index():
+    main2 = Main2()
     if request.method=='POST':
-        topN = request.form['Top_N']
-        UTarget = request.form['User_Target']
-        main2 = Main2()
-        Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(1)
-        main3 = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, UTarget, topN)
-        Hasil_irisan, Hasil_pelatihan, Hasil_rekom, Hasil_test, nilai_AP, nilai_DCG, nilai_F1Score, nilai_NDCG, nilai_Recall, nilai_Precision = main3.Proses()
-        jml_irisan = len(Hasil_irisan)
-        jml_pelatihan = len(Hasil_pelatihan)
-        jml_rekom = len(Hasil_rekom)
-        jml_test = len(Hasil_test)
-        return render_template('result.html', irisan=Hasil_irisan, pelatihan=Hasil_pelatihan, rekom=Hasil_rekom, test=Hasil_test, jml_rekom=jml_rekom, jml_irisan=jml_irisan, jml_pelatihan=jml_pelatihan, jml_test=jml_test)
-    return render_template('index.html', user=user, topN=topNp)
+        if request.form['next'] == "pilih":
+            menu = request.form['menu']
+            metode = request.form['metode']
+            Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(menu)
+            prepare = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, 2, 2)
+            user, topNp = prepare.data_userTopN()
+            return render_template('input.html', user=user, topN=topNp, menu=menu, metode=metode)
+        elif request.form['next'] == "detail": 
+            topN = int(request.form['Top_N'])
+            UTarget = int(request.form['User_Target'])
+            menu = request.form['menu']
+            Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(menu)
+            main3 = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, UTarget, topN)
+            Hasil_irisan, Hasil_pelatihan, Hasil_rekom, Hasil_test, nilai_AP, nilai_DCG, nilai_F1Score, nilai_NDCG, nilai_Recall, nilai_Precision = main3.Proses()
+            jml_irisan = len(Hasil_irisan)
+            jml_pelatihan = len(Hasil_pelatihan)
+            jml_rekom = len(Hasil_rekom)
+            jml_test = len(Hasil_test)
+            nilai_AP = str(nilai_AP)[:7]
+            nilai_F1Score = str(nilai_F1Score)[:7]
+            nilai_DCG= str(nilai_DCG[topN-1])[:7]
+            nilai_NDCG = str(nilai_NDCG)[:7]
+            nilai_Precision = str(nilai_Precision[topN-1])[:7]
+            nilai_Recall = str(nilai_Recall[topN-1])[:7]
+            return render_template('result.html', nilai_Recall=nilai_Recall, nilai_NDCG=nilai_NDCG, nilai_AP=nilai_AP, nilai_DCG=nilai_DCG, nilai_F1Score=nilai_F1Score, nilai_Precision=nilai_Precision,menu=menu, topN=topN ,UTarget=UTarget, irisan=Hasil_irisan, pelatihan=Hasil_pelatihan, rekom=Hasil_rekom, test=Hasil_test, jml_rekom=jml_rekom, jml_irisan=jml_irisan, jml_pelatihan=jml_pelatihan, jml_test=jml_test)
+        elif request.form['next'] == "rekom": 
+            topN = int(request.form['Top_N'])
+            UTarget = int(request.form['User_Target'])
+            menu = request.form['menu']
+            Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(menu)
+            main3 = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, UTarget, topN)
+            Hasil_irisan, Hasil_pelatihan, Hasil_rekom, Hasil_test, nilai_AP, nilai_DCG, nilai_F1Score, nilai_NDCG, nilai_Recall, nilai_Precision = main3.Proses()
+            jml_irisan = len(Hasil_irisan)
+            jml_pelatihan = len(Hasil_pelatihan)
+            jml_rekom = len(Hasil_rekom)
+            jml_test = len(Hasil_test)
+            return render_template('rekom.html', menu=menu,topN=topN ,UTarget=UTarget, irisan=Hasil_irisan, pelatihan=Hasil_pelatihan, rekom=Hasil_rekom, test=Hasil_test, jml_rekom=jml_rekom, jml_irisan=jml_irisan, jml_pelatihan=jml_pelatihan, jml_test=jml_test)
+    
+    else:
+        return render_template('index.html')
 
 
 if __name__ == '__main__':

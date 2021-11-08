@@ -72,92 +72,93 @@
 
   <main id="main">
       <!-- ======= Counts Section ======= -->
-      <section class="counts section-bg">
-        <div class="container">
-          <div class="row justify-content-end">
-            <div class="col">
-              <h4>Target User = {{UTarget}} <br> Jumlah N = {{topN}}</h4>
-            </div>
-            
-            <div class="col row">
-            <h4>Evaluasi</h4>
-              <div class="col">
-                <img src="/static/assets/img/ndcg.png" alt="NDCG" class="w-75">
-                <h6>Nilai Precision = {{nilai_Precision}}</h6>
-              </div>
-              <div class="col">
-                <div>
-                  <img src="/static/assets/img/precision.png" alt="NDCG" class="w-75">
-                  <h6>Nilai NDCG = {{nilai_NDCG}}</h6>
-                </div>
-              </div>
-          </div>
-        </div>
-
-      </section>
       <section id="counts" class="counts section-bg">
-        <div class="container"> 
+        <div class="container">
+  
           <div class="row justify-content-end">
+  
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box border border-info">
-                <span data-purecounter-start="0" data-purecounter-end="{{jml_pelatihan}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
-                <h3 class="text-center">Data Latih</h3>
-                <span class="text-center">data hotel yang telah diberi rating oleh target user (didapatkan dari dataset) dan untuk digunakan di dalam pemodelan metode
-                  </span>
+                <span data-purecounter-start="0" data-purecounter-end="{{jml_pelatihan}}" data-purecounter-duration="2" class="purecounter"></span>
+                <h3>Data Training</h3>
                 <br>
-                <ol class="ml-5">
-                  {% for x in pelatihan %}
-                    <li><h6 class="text-start p-1">{{x}}</h6></li>
-                  {% endfor %}
-                </ol>
+                {% for x in pelatihan %}
+                    <h6 class="text-start p-1">- {{x}}</h6>
+                {% endfor %}
               </div>
             </div>
   
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box border border-info">
-                <span data-purecounter-start="0" data-purecounter-end="{{jml_rekom}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
-                <h3 class="text-center">Data Hasil Rekomendasi</h3>
-                <span class="text-center">data hasil rekomendasi untuk target user yang dihasilkan dari pemodelan metode</span>
+                <span data-purecounter-start="0" data-purecounter-end="{{jml_rekom}}" data-purecounter-duration="2" class="purecounter"></span>
+                <h3>Rekomendasi</h3>
                 <br>
-                <ol>
-                  {% for y in rekom %}
-                    <li><h6 class="text-start p-1">{{y}}</h6></li>
-                  {% endfor %}
-                </ol>
+                {% for y in rekom %}
+                    <h6 class="text-start p-1">- {{y}}</h6>
+                {% endfor %}
               </div>
             </div>
   
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box border border-info">
-                <span data-purecounter-start="0" data-purecounter-end="{{jml_test}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
-                <h3 class="text-center">Data Ground-truth</h3>
-                <span class="text-center">data test dari target user yang didapatkan dari dataset dan untuk digunakan di dalam evaluasi hasil rekomendasi metode</span>
+                <span data-purecounter-start="0" data-purecounter-end="{{jml_test}}" data-purecounter-duration="2" class="purecounter"></span>
+                <h3>Data Test</h3>
                 <br>
-                <ol>
-                  {% for p in test %}
-                    <li><h6 class="text-start p-1">{{p}}</h6></li>
-                  {% endfor %}
-                </ol>
+                {% for p in test %}
+                    <h6 class="text-start p-1">- {{p}}</h6>
+                {% endfor %}
               </div>
             </div>
-              <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
-                <div class="count-box border border-info">
-                  <span data-purecounter-start="0" data-purecounter-end="{{jml_irisan}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
-                  <h3 class="text-center">Irisan Data (Hasil Rekomendasi & Ground-truth)</h3>
-                  <span class="text-center">mengukur performa metode sistem rekomendasi berdasarkan metrik Precision dan NDCG, yaitu dengan membandingkan Data Rekomendasi dengan Data <i>Ground-truth</i></span>
-                  <br>
-                  <ol>
-                    {% for q in irisan %}
-                      <li><h6 class="text-start p-1">{{q}}</h6></li>
-                    {% endfor %}
-                  </ol>
-                </div>
+  
+            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+              <div class="count-box border border-info">
+                <span data-purecounter-start="0" data-purecounter-end="{{jml_irisan}}" data-purecounter-duration="2" class="purecounter"></span>
+                <h3>Irisan Rekom & Test</h3>
+                <br>
+                {% for q in irisan %}
+                    <h6 class="text-start p-1">- {{q}}</h6>
+                {% endfor %}
+              </div>
             </div>
+  
           </div>
   
         </div>
       </section><!-- End Counts Section -->
+  
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
 
+        <div class="section-title">
+          <h2>About Us</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. </p>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p>
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <a href="#" class="btn-learn-more">Learn More</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
   </main><!-- End #main -->
   <!-- ======= Footer ======= -->
   <footer id="footer">
