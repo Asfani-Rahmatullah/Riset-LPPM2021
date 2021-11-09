@@ -50,7 +50,7 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="getstarted scrollto" href="/">Mulai</a></li>
+          <li><a class="getstarted scrollto" href="#contact">Mulai</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -68,67 +68,3 @@
             </h2>
         </div>
       </div>
-    </div>
-  </section><!-- End Hero -->
-
-  <main id="main">
-      <!-- ======= Counts Section ======= -->
-      <section id="counts" class="counts section-bg">
-        <div class="container"> 
-            <div class="mx-auto w-50">
-                <form action="/" method="POST">
-                    <input type="hidden" name="next" value="detail">
-                    <input type="hidden" name="Top_N" value="{{topN}}">
-                    <input type="hidden" name="menu" value="{{menu}}">
-                    <input type="hidden" name="User_Target" value="{{UTarget}}">
-                    <input type="hidden" name="metode" value="{{metode}}">
-                    <h4>Target User = {{UTarget}} | Jumlah N = {{topN}}</h4>
-                    <p>Metode : {{metode}}</p>
-                    <p class="fs-6">
-                      Sumber data: <a href="https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6">(https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6)</a> <br>
-                      Detil data: merupakan dataset multi-kriteria yang membahas tentang rating hotel. Dimana dataset yang digunakan dalam penelitian ini sebanyak 25.000 yang terdiri dari 2.595 pengguna, 5.209 item, empat kriteria rating (Overall, Usefull, Funny, Cool).</p>
-                    <input type="submit" value="Detail Analisa" class="btn btn-link fs-4 p-0">
-                </form>
-                <br>
-            <div class="count-box border border-info text-center">
-                <span data-purecounter-start="0" data-purecounter-end="{{jml_rekom}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
-                <h3>Rekomendasi</h3>
-                <p class="text-center">(data hasil rekomendasi untuk target user yang dihasilkan dari pemodelan metode)</p>
-                <br>
-                <ol>
-                    {% for y in rekom %}
-                    <li><h6 class="text-start p-1">{{y}}</h6></li>
-                    {% endfor %}
-                </ol>
-            </div>
-            </div>
-            </div>
-  
-          </div>
-  
-        </div>
-      </section><!-- End Counts Section -->
-  </main><!-- End #main -->
-  <!-- ======= Footer ======= -->
-  {% include 'footer.html' %}
-  <!-- End Footer -->
-
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="{{ url_for ('static', filename='assets/vendor/aos/aos.js') }}"></script>
-  <script src="{{ url_for ('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ url_for ('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
-  <script src="{{ url_for ('static', filename='assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
-  <script src="{{ url_for ('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
-  <script src="{{ url_for ('static', filename='assets/vendor/purecounter/purecounter.js') }}"></script>
-  <script src="{{ url_for ('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{{ url_for ('static', filename='assets/js/main.js') }}"></script>
-
-</body>
-
-</html>

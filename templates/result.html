@@ -34,6 +34,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script async="true" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=AM_CHTML"> </script>
 </head>
 
 <body>
@@ -63,8 +64,9 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
-          <h1>Sistem Rekomendasi Hotel berbasis <br>Multi-Kriteria</h1>
-          <h2>Hasil Proses Rekomendasi</h2>
+          <h1 class="fs-1">Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1>
+          <h2 class="fs-5">Aplikasi ini adalah prototipe yang mensimulasikan kerja dan analisa dari sistem rekomendasi. Pengguna aplikasi dapat memilih dari kedua metode yang disediakan di dalam sistem untuk menghasilkan Top-N daftar rekomendasi bagi target <i> user.</i> Daftar rekomendasi diperoleh berdasarkan model metode yang dibangun menggunakan Data Latih dari dataset Rating Multi-kriteria Hotel.
+            </h2>
         </div>
       </div>
     </div>
@@ -75,20 +77,47 @@
       <section class="counts section-bg">
         <div class="container">
           <div class="row justify-content-end">
+            <h4 class="pl-4">Target User = {{UTarget}} <br> Jumlah N = {{topN}}</h4>
+            <p>Metode : {{metode}}</p>
             <div class="col">
-              <h4>Target User = {{UTarget}} <br> Jumlah N = {{topN}}</h4>
-            </div>
-            
-            <div class="col row">
-            <h4>Evaluasi</h4>
+              <h4>Evaluasi</h4>
               <div class="col">
-                <img src="/static/assets/img/ndcg.png" alt="NDCG" class="w-75">
-                <h6>Nilai Precision = {{nilai_Precision}}</h6>
+                <div class="cmath fs-6">
+                  
+                  `DCG(Test_(u),l_(u),N) := sum_(n=1)^N 1/log_(2)(1+n)  .&\pi (l_(u)  &epsilon Test_(u))`
+                  `IDCG(Test_(N)) := sum_(n=1)^N 1/log_(2)(1+n)`
+                  `NDCG(Test_(u),N) := frac(DCG(Test_(u),N))(IDCG(N))`
+                 </div>
+                 <h6>Nilai NDCG = {{nilai_NDCG}}</h6>
               </div>
               <div class="col">
-                <div>
-                  <img src="/static/assets/img/precision.png" alt="NDCG" class="w-75">
-                  <h6>Nilai NDCG = {{nilai_NDCG}}</h6>
+                <div><div class="cmath fs-6">
+                  `Top(l_(u),N) := {l_(u)(1), ... ,l_(u)(n)}`
+                  `Precision(Test_(u),l_(u),N) := frac(|Top(l_(u),N) \cap Test_(u)|)(N)`
+                 </div>
+                  <h6>Nilai Precision = {{nilai_Precision}}</h6>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col">
+            <h4>Definisi:</h4>
+              <div class="col">
+                <ul>
+                  <li>u = target user</li>
+                  <li>N = jumlah rekomendasi</li>
+                  <li>I = daftar hotel</li>
+                  <li>l<sub>u</sub> = data rekomendasi hotel yang sudah terurut secara descending untuk target user u, dimana l<sub>u</sub> &epsilon; I</li>
+                  <li>Top(l<sub>u</sub>, N) = Top-N daftar untuk rekomendasi hotel untuk target user u</li>
+                  <li>Test<sub>u</sub> = data <i>ground-truth</i> dari target user u</li>
+                </ul>
+              </div>
+              <div class="col">
+                <div><div class="cmath fs-6">
+                  `Top(l_(u),N) := {l_(u)(1), ... ,l_(u)(n)}`
+                  `Precision(Test_(u),l_(u),N) := frac(|Top(l_(u),N) \cap Test_(u)|)(N)`
+                 </div>
+                  <h6>Nilai Precision = {{nilai_Precision}}</h6>
                 </div>
               </div>
           </div>
@@ -96,14 +125,16 @@
 
       </section>
       <section id="counts" class="counts section-bg">
-        <div class="container"> 
+        <div class="container">
+          <p class="fs-6">
+            Sumber data: <a href="https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6">(https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6)</a> <br>
+            Detil data: merupakan dataset multi-kriteria yang membahas tentang rating hotel. Dimana dataset yang digunakan dalam penelitian ini sebanyak 25.000 yang terdiri dari 2.595 pengguna, 5.209 item, empat kriteria rating (Overall, Usefull, Funny, Cool).</p>
           <div class="row justify-content-end">
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box border border-info">
                 <span data-purecounter-start="0" data-purecounter-end="{{jml_pelatihan}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
                 <h3 class="text-center">Data Latih</h3>
-                <span class="text-center">data hotel yang telah diberi rating oleh target user (didapatkan dari dataset) dan untuk digunakan di dalam pemodelan metode
-                  </span>
+                <p class="text-center">(data hotel yang telah diberi rating oleh target user (didapatkan dari dataset) dan untuk digunakan di dalam pemodelan metode)</p>
                 <br>
                 <ol class="ml-5">
                   {% for x in pelatihan %}
@@ -117,7 +148,7 @@
               <div class="count-box border border-info">
                 <span data-purecounter-start="0" data-purecounter-end="{{jml_rekom}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
                 <h3 class="text-center">Data Hasil Rekomendasi</h3>
-                <span class="text-center">data hasil rekomendasi untuk target user yang dihasilkan dari pemodelan metode</span>
+                <p class="text-center">(data hasil rekomendasi untuk target user yang dihasilkan dari pemodelan metode)</p>
                 <br>
                 <ol>
                   {% for y in rekom %}
@@ -131,7 +162,7 @@
               <div class="count-box border border-info">
                 <span data-purecounter-start="0" data-purecounter-end="{{jml_test}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
                 <h3 class="text-center">Data Ground-truth</h3>
-                <span class="text-center">data test dari target user yang didapatkan dari dataset dan untuk digunakan di dalam evaluasi hasil rekomendasi metode</span>
+                <p class="text-center">(data test dari target user yang didapatkan dari dataset dan untuk digunakan di dalam evaluasi hasil rekomendasi metode)</p>
                 <br>
                 <ol>
                   {% for p in test %}
@@ -144,7 +175,7 @@
                 <div class="count-box border border-info">
                   <span data-purecounter-start="0" data-purecounter-end="{{jml_irisan}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
                   <h3 class="text-center">Irisan Data (Hasil Rekomendasi & Ground-truth)</h3>
-                  <span class="text-center">mengukur performa metode sistem rekomendasi berdasarkan metrik Precision dan NDCG, yaitu dengan membandingkan Data Rekomendasi dengan Data <i>Ground-truth</i></span>
+                  <p class="text-center">(mengukur performa metode sistem rekomendasi berdasarkan metrik Precision dan NDCG, yaitu dengan membandingkan Data Rekomendasi dengan Data <i>Ground-truth</i>)</p>
                   <br>
                   <ol>
                     {% for q in irisan %}
@@ -160,30 +191,8 @@
 
   </main><!-- End #main -->
   <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-    <div class="container d-md-flex py-4">
-
-      <div class="me-md-auto text-center text-md-start">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Trunojoyoan</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
-          Designed by <a href="https://bootstrapmade.com/">Trunojoyoan Team</a>
-        </div>
-      </div>
-      <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
+  {% include 'footer.html' %}
+  <!-- End Footer -->
 
 
   <div id="preloader"></div>

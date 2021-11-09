@@ -1,0 +1,37 @@
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Trunojoyoan</span></strong>. All Rights Reserved
+        </div>
+      </div>
+      {% if metode == 'Min-Max User-Based'%}
+      <div class="credits mx-2">
+        <h4 class="text-center">Referensi:</h4>
+        <cite>Ifada, N., Sophan, M. K., Putri, N. F. D., and Setyawan, G. E., "A User-Based
+        Normalization Multi-Criteria Rating Approach for Hotel Recommendation System," in
+        Proceeding of The 2021 International Conference on Sustainable Information
+        Engineering and Technology (SIET), Malang (Online), 2021, pp. 151-161. DOI:
+        <a href="https://doi.org/10.1145/3479645.3479678.">https://doi.org/10.1145/3479645.3479678.</a>
+        </cite></div>
+      {% elif metode == 'Min-Max Item-Based'%}
+        <div class="credits mx-2">
+            <h4 class="text-center">Referensi:</h4>
+            <cite>Ifada, N., Sophan, M. K., and Putri, N. F. D., "A MinMax Item-based Method for
+            Multi-Criteria Recommendation Systems," in Proceeding of The 6th International
+            Conference on Computer Science and Computational Intelligence (ICCSCI), Jakarta
+            (Online), 2021, p. [In Press].
+        </cite></div>
+      {% else %}
+      {% endif %}
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->

@@ -208,6 +208,7 @@ def index():
         elif request.form['next'] == "detail": 
             topN = int(request.form['Top_N'])
             UTarget = int(request.form['User_Target'])
+            metode = request.form['metode']
             menu = request.form['menu']
             Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(menu)
             main3 = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, UTarget, topN)
@@ -222,10 +223,11 @@ def index():
             nilai_NDCG = str(nilai_NDCG)[:7]
             nilai_Precision = str(nilai_Precision[topN-1])[:7]
             nilai_Recall = str(nilai_Recall[topN-1])[:7]
-            return render_template('result.html', nilai_Recall=nilai_Recall, nilai_NDCG=nilai_NDCG, nilai_AP=nilai_AP, nilai_DCG=nilai_DCG, nilai_F1Score=nilai_F1Score, nilai_Precision=nilai_Precision,menu=menu, topN=topN ,UTarget=UTarget, irisan=Hasil_irisan, pelatihan=Hasil_pelatihan, rekom=Hasil_rekom, test=Hasil_test, jml_rekom=jml_rekom, jml_irisan=jml_irisan, jml_pelatihan=jml_pelatihan, jml_test=jml_test)
+            return render_template('result.html', metode=metode, nilai_Recall=nilai_Recall, nilai_NDCG=nilai_NDCG, nilai_AP=nilai_AP, nilai_DCG=nilai_DCG, nilai_F1Score=nilai_F1Score, nilai_Precision=nilai_Precision,menu=menu, topN=topN ,UTarget=UTarget, irisan=Hasil_irisan, pelatihan=Hasil_pelatihan, rekom=Hasil_rekom, test=Hasil_test, jml_rekom=jml_rekom, jml_irisan=jml_irisan, jml_pelatihan=jml_pelatihan, jml_test=jml_test)
         elif request.form['next'] == "rekom": 
             topN = int(request.form['Top_N'])
             UTarget = int(request.form['User_Target'])
+            metode = request.form['metode']
             menu = request.form['menu']
             Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(menu)
             main3 = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, UTarget, topN)
@@ -234,7 +236,7 @@ def index():
             jml_pelatihan = len(Hasil_pelatihan)
             jml_rekom = len(Hasil_rekom)
             jml_test = len(Hasil_test)
-            return render_template('rekom.html', menu=menu,topN=topN ,UTarget=UTarget, irisan=Hasil_irisan, pelatihan=Hasil_pelatihan, rekom=Hasil_rekom, test=Hasil_test, jml_rekom=jml_rekom, jml_irisan=jml_irisan, jml_pelatihan=jml_pelatihan, jml_test=jml_test)
+            return render_template('rekom.html', metode=metode, menu=menu,topN=topN ,UTarget=UTarget, irisan=Hasil_irisan, pelatihan=Hasil_pelatihan, rekom=Hasil_rekom, test=Hasil_test, jml_rekom=jml_rekom, jml_irisan=jml_irisan, jml_pelatihan=jml_pelatihan, jml_test=jml_test)
     
     else:
         return render_template('index.html')
