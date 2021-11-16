@@ -6,8 +6,6 @@ import numpy as np
 from werkzeug.datastructures import IfRange
 import xlrd
 import math
-from flask import Flask, render_template, request, redirect, url_for
-app = Flask(__name__)
 
 class Main2():
     def __init__(self):
@@ -26,7 +24,7 @@ class Main2():
                 
             first_sheet = book.sheet_by_index(id_sheet)
             for i in range(100): #perulangan  untuk mengambil data dari excel, sebanyak jumlah topN yaitu 100
-                print("i", i)
+                
                 cells = first_sheet.row_slice(rowx=i+1, start_colx=0, end_colx=12) #membaca data perbaris
                 index = 0
                 for cell in cells: #perulangan untuk mengambil data perkolom
@@ -37,7 +35,7 @@ class Main2():
     def load_Detail(self, Menu):
         DataRekom_Usulan = []
         DataTest = []
-        print("Proses Memuat Data Rekomendasi dan Testing")
+        
         DataRekom_Usulan.append(joblib.load("Dataset1/TopN_M"+str(Menu)+"_3.sav"))
         DataTest.append(joblib.load("Dataset1/Testing3.sav"))
         NamaItem = joblib.load("Dataset1/NamaItem.sav")
@@ -66,7 +64,7 @@ class Main3():
         return self.User, self.TopN
 
     def Proses(self):
-        print("Rekomendasi")
+        
         #Ambil Nilai
         Fold = 1-1
         Target_User = int(self.Target_User)-1
@@ -84,22 +82,22 @@ class Main3():
         Rekom_Eval = []
         Test_Eval = []
         
-        print("lw_rekom")
+        
         for i in range(TopN):
             NamaHotel = int(self.DataRekom[Fold][Target_User][i])
             Hasil_rekom.append(self.NamaItem[2][NamaHotel] + "(ID: " + str(NamaHotel+1)+ ")") #Ubah disini
             Rekom_Eval.append(self.DataRekom[Fold][Target_User][i]) #untuk perhitungan evaluasi
-        print("lw_test")
+        
         for i in range(len(self.DataTest[Fold][Target_User])):
             NamaHotel = int(self.DataTest[Fold][Target_User][i])
             Hasil_test.append(self.NamaItem[2][NamaHotel] + "(ID: " + str(NamaHotel+1)+ ")")
             Test_Eval.append(self.DataTest[Fold][Target_User][i])
-        print("lw_pelatihan")
+        
         data_pelatihan = np.setdiff1d(Full_Item, self.DataRekom[Fold][Target_User])
         for i in range(len(data_pelatihan)):
             NamaHotel = data_pelatihan[i]
             Hasil_pelatihan.append(self.NamaItem[2][NamaHotel]+ "(ID: " + str(NamaHotel+1)+ ")")
-        print("lw_irisan")
+        
         Jumlah_Irisan = 0
         for i in range(TopN):
             if(Rekom_Eval[i] in Test_Eval):
@@ -107,20 +105,20 @@ class Main3():
                 Hasil_irisan.append(self.NamaItem[2][NamaHotel] + "(ID: " + str(NamaHotel+1)+ ")")
                 Jumlah_Irisan = Jumlah_Irisan+1
 
-        print("sukses")
+        
 
         nilai_Precision = self.Precision(Rekom_Eval, Test_Eval, TopN)
-        print("nilai_Precision", nilai_Precision)
+       
         nilai_Recall = self.Recall(Rekom_Eval, Test_Eval, TopN)
-        print("nilai_Recall", nilai_Recall)
+      
         nilai_F1Score = self.F1Score(Rekom_Eval, Test_Eval, TopN)
-        print("nilai_F1Score", nilai_F1Score)
+        
         nilai_AP = self.AP(Rekom_Eval, Test_Eval, TopN)
-        print("nilai_AP", nilai_AP)
+        
         nilai_DCG = self.DCG(Rekom_Eval, Test_Eval, TopN)
-        print("nilai_DCG", nilai_DCG)
+       
         nilai_NDCG = self.NDCG(Rekom_Eval, Test_Eval, TopN)
-        print("nilai_NDCG", nilai_NDCG)
+        
 
         return Hasil_irisan, Hasil_pelatihan, Hasil_rekom, Hasil_test, nilai_AP, nilai_DCG, nilai_F1Score, nilai_NDCG, nilai_Recall, nilai_Precision
 
@@ -140,7 +138,10 @@ class Main3():
         for top in range(N):
             if(indek_topN[top] in Tes):
                 temp = temp + 1
-            hitung_recall = temp/(len(Tes))
+            if (len(Tes)== 0):
+                hitung_recall = 0
+            else:
+                hitung_recall = temp/(len(Tes))
             recallFull.append(hitung_recall)
         return recallFull
 
@@ -163,7 +164,10 @@ class Main3():
                 hitung_ap.append(precision[i])
             else:
                 hitung_ap.append(0.0)
-        nilai_AP_Top = sum(hitung_ap)/len(Tes)
+        if (len(Tes) == 0):
+            nilai_AP_Top = 0
+        else:
+            nilai_AP_Top = sum(hitung_ap)/len(Tes)
         return nilai_AP_Top
 
     def DCG(self, indek_topN, Tes, N):
@@ -189,61 +193,11 @@ class Main3():
         NDCG = dcg[N-1]/idcg
         return NDCG
 
-pre1 = Main2()
-Detail_Data_Training, Detail_Data_Test, NamaItem = pre1.load_Detail(1)
-
-
-
-@app.route("/",methods=['GET','POST'])
-def index():
-    main2 = Main2()
-    if request.method=='POST':
-        if request.form['next'] == "pilih":
-            menu = request.form['menu']
-            metode = request.form['metode']
-            Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(menu)
-            prepare = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, 2, 2)
-            user, topNp = prepare.data_userTopN()
-            return render_template('input.html', user=user, topN=topNp, menu=menu, metode=metode)
-        elif request.form['next'] == "detail": 
-            topN = int(request.form['Top_N'])
-            UTarget = int(request.form['User_Target'])
-            metode = request.form['metode']
-            menu = request.form['menu']
-            Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(menu)
-            main3 = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, UTarget, topN)
-            Hasil_irisan, Hasil_pelatihan, Hasil_rekom, Hasil_test, nilai_AP, nilai_DCG, nilai_F1Score, nilai_NDCG, nilai_Recall, nilai_Precision = main3.Proses()
-            jml_irisan = len(Hasil_irisan)
-            jml_pelatihan = len(Hasil_pelatihan)
-            jml_rekom = len(Hasil_rekom)
-            jml_test = len(Hasil_test)
-            nilai_AP = str(nilai_AP)[:7]
-            nilai_F1Score = str(nilai_F1Score)[:7]
-            nilai_DCG= str(nilai_DCG[topN-1])[:7]
-            nilai_NDCG = str(nilai_NDCG)[:7]
-            nilai_Precision = str(nilai_Precision[topN-1])[:7]
-            nilai_Recall = str(nilai_Recall[topN-1])[:7]
-            return render_template('result.html', metode=metode, nilai_Recall=nilai_Recall, nilai_NDCG=nilai_NDCG, nilai_AP=nilai_AP, nilai_DCG=nilai_DCG, nilai_F1Score=nilai_F1Score, nilai_Precision=nilai_Precision,menu=menu, topN=topN ,UTarget=UTarget, irisan=Hasil_irisan, pelatihan=Hasil_pelatihan, rekom=Hasil_rekom, test=Hasil_test, jml_rekom=jml_rekom, jml_irisan=jml_irisan, jml_pelatihan=jml_pelatihan, jml_test=jml_test)
-        elif request.form['next'] == "rekom": 
-            topN = int(request.form['Top_N'])
-            UTarget = int(request.form['User_Target'])
-            metode = request.form['metode']
-            menu = request.form['menu']
-            Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(menu)
-            main3 = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, UTarget, topN)
-            Hasil_irisan, Hasil_pelatihan, Hasil_rekom, Hasil_test, nilai_AP, nilai_DCG, nilai_F1Score, nilai_NDCG, nilai_Recall, nilai_Precision = main3.Proses()
-            jml_irisan = len(Hasil_irisan)
-            jml_pelatihan = len(Hasil_pelatihan)
-            jml_rekom = len(Hasil_rekom)
-            jml_test = len(Hasil_test)
-            return render_template('rekom.html', metode=metode, menu=menu,topN=topN ,UTarget=UTarget, irisan=Hasil_irisan, pelatihan=Hasil_pelatihan, rekom=Hasil_rekom, test=Hasil_test, jml_rekom=jml_rekom, jml_irisan=jml_irisan, jml_pelatihan=jml_pelatihan, jml_test=jml_test)
-    
-    else:
-        return render_template('index.html')
-@app.route("/about")
-def about():
-    return render_template('about.html')
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+main2 = Main2()
+Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(10)
+for i in range(2954):        
+    main3 = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, i+1, 20)
+    Hasil_irisan, Hasil_pelatihan, Hasil_rekom, Hasil_test, nilai_AP, nilai_DCG, nilai_F1Score, nilai_NDCG, nilai_Recall, nilai_Precision = main3.Proses()
+    jml_irisan = len(Hasil_irisan)
+    if jml_irisan !=0:
+        print ("User " + str((i+1)))

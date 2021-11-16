@@ -1,6 +1,36 @@
 {% include 'header.html'%}
+<body>
+  <div id="loading" class="load"></div>
+  <div id="content">
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="#">Trunojoyoan</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
+          <li><a class="nav-link scrollto" href="/about">About</a></li>
+          <li><a class="getstarted scrollto" href="#contact">Metode</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-9 text-center">
+          <h1 class="fs-1">Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1><br>
+        </div>
+      </div>
       <div class="text-center">
-        <a href="#contact" class="btn-get-started scrollto">Mulai</a>
       </div>
     </div>
   </section><!-- End Hero -->
@@ -16,7 +46,7 @@
                 <h2 class="text-center">Rekomendasi</h2>
                 <p class="text-center">Metode : {{metode}}</p>
                 <div class="col-md-6 form-group">
-                  <h4>Target User</h4>
+                  <h4>Target <i>User</i></h4>
                   <select name="User_Target" id="User_Target" class="form-select">
                     {% for i in user %}
                     <option value="{{i}}">{{i}}</option>
@@ -34,14 +64,11 @@
                   <input type="hidden" name="menu" value="{{menu}}">
                   <input type="hidden" name="next" value="rekom">
                 </div>
-                <p class="text-danger fs-6"><i>Disclaimer: Dataset yang digunakan sangat sparse dan metode evaluasi
-                  dari dilakukan secara offline. Oleh karena itu kecenderungan nilai
-                  evaluasinya sangatlah rendah (atau bahkan bernilai “0” bagi sejumlah
-                  target user), karena hotel yang telah diberi rating oleh user sangatlah
-                  sedikit.
-                  </i></p>
+                <p class="text-danger fs-6"><i>Disclaimer</i>: Dataset yang digunakan sangat <i>sparse</i> dan metode evaluasi dilakukan secara <i>offline</i>. 
+                  Oleh karena itu kecenderungan nilai evaluasinya sangatlah rendah (atau bahkan bernilai “0” bagi sejumlah target <i>user</i>), 
+                  karena jumlah hotel yang telah diberi <i>rating</i> oleh target <i>user</i> sangatlah sedikit.</p>
                 <br>
-                <input type="submit" value="Masukkan" class="btn btn-primary mx-auto w-25 mt-2">
+                <button type="submit" value="Tampilkan Rekomendasi" class="btn btn-primary mx-auto w-25 mt-2">Tampilkan Rekomendasi</button>
                 </div>
             </form>
           </div>
@@ -52,9 +79,6 @@
   </main><!-- End #main -->
 
   {% include 'footer.html' %}
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{{ url_for ('static', filename='assets/vendor/aos/aos.js') }}"></script>

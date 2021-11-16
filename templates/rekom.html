@@ -48,9 +48,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="getstarted scrollto" href="/">Mulai</a></li>
+          <li><a class="getstarted scrollto" href="/">Metode</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -63,9 +63,7 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
-          <h1 class="fs-1">Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1>
-          <h2 class="fs-5">Aplikasi ini adalah prototipe yang mensimulasikan kerja dan analisa dari sistem rekomendasi. Pengguna aplikasi dapat memilih dari kedua metode yang disediakan di dalam sistem untuk menghasilkan Top-N daftar rekomendasi bagi target <i> user.</i> Daftar rekomendasi diperoleh berdasarkan model metode yang dibangun menggunakan Data Latih dari dataset Rating Multi-kriteria Hotel.
-            </h2>
+          <h1 class="fs-1">Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1><br>
         </div>
       </div>
     </div>
@@ -82,18 +80,15 @@
                     <input type="hidden" name="menu" value="{{menu}}">
                     <input type="hidden" name="User_Target" value="{{UTarget}}">
                     <input type="hidden" name="metode" value="{{metode}}">
-                    <h4>Target User = {{UTarget}} | Jumlah N = {{topN}}</h4>
+                    <h4>Target <i>User</i> = {{UTarget}} | Jumlah N = {{topN}}</h4>
                     <p>Metode : {{metode}}</p>
-                    <p class="fs-6">
-                      Sumber data: <a href="https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6">(https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6)</a> <br>
-                      Detil data: merupakan dataset multi-kriteria yang membahas tentang rating hotel. Dimana dataset yang digunakan dalam penelitian ini sebanyak 25.000 yang terdiri dari 2.595 pengguna, 5.209 item, empat kriteria rating (Overall, Usefull, Funny, Cool).</p>
                     <input type="submit" value="Detail Analisa" class="btn btn-link fs-4 p-0">
                 </form>
                 <br>
             <div class="count-box border border-info text-center">
                 <span data-purecounter-start="0" data-purecounter-end="{{jml_rekom}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
                 <h3>Rekomendasi</h3>
-                <p class="text-center">(data hasil rekomendasi untuk target user yang dihasilkan dari pemodelan metode)</p>
+                <p class="text-center">(Data hasil rekomendasi untuk target <i>user</i> yang dihasilkan dari pemodelan metode)</p>
                 <br>
                 <ol>
                     {% for y in rekom %}
@@ -112,10 +107,6 @@
   <!-- ======= Footer ======= -->
   {% include 'footer.html' %}
   <!-- End Footer -->
-
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{{ url_for ('static', filename='assets/vendor/aos/aos.js') }}"></script>

@@ -49,7 +49,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="getstarted scrollto" href="/">Mulai</a></li>
         </ul>
@@ -64,10 +64,8 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
-          <h1 class="fs-1">Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1>
-          <h2 class="fs-5">Aplikasi ini adalah prototipe yang mensimulasikan kerja dan analisa dari sistem rekomendasi. Pengguna aplikasi dapat memilih dari kedua metode yang disediakan di dalam sistem untuk menghasilkan Top-N daftar rekomendasi bagi target <i> user.</i> Daftar rekomendasi diperoleh berdasarkan model metode yang dibangun menggunakan Data Latih dari dataset Rating Multi-kriteria Hotel.
-            </h2>
-        </div>
+          <h1 class="fs-1">Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1><br>
+          </div>
       </div>
     </div>
   </section><!-- End Hero -->
@@ -77,48 +75,176 @@
       <section class="counts section-bg">
         <div class="container">
           <div class="row justify-content-end">
-            <h4 class="pl-4">Target User = {{UTarget}} <br> Jumlah N = {{topN}}</h4>
-            <p>Metode : {{metode}}</p>
+            <h3 class="text-center">Evaluasi Metode {{metode}}</h3>
+            <p class="text-center ket">(Mengukur performa metode sistem rekomendasi berdasarkan metrik Precision dan NDCG, yaitu dengan membandingkan Data Rekomendasi dengan Data <i>Ground-truth</i>)</p>
+            <h6 class="pl-4 text-center fs-5 text-danger">Target <i>User</i> = {{UTarget}}, Jumlah N = {{topN}}, Nilai Precision = {{nilai_Precision}}, Nilai NDCG = {{nilai_NDCG}}</h6>
+          </div>
+          <div class="row justify-content-end border border-info rounded my-2">
+            
             <div class="col">
-              <h4>Evaluasi</h4>
               <div class="col">
+                <h5>Persamaan:</h5>
                 <div class="cmath fs-6">
-                  
-                  `DCG(Test_(u),l_(u),N) := sum_(n=1)^N 1/log_(2)(1+n)  .&\pi (l_(u)  &epsilon Test_(u))`
-                  `IDCG(Test_(N)) := sum_(n=1)^N 1/log_(2)(1+n)`
-                  `NDCG(Test_(u),N) := frac(DCG(Test_(u),N))(IDCG(N))`
+                  <table>
+                    <tr>
+                      <td>
+                       `Top(l_(u),N)` 
+                      </td>
+                      <td>
+                        `:=`
+                      </td>
+                      <td>
+                        `{l_(u)(1), ... ,l_(u)(N)}`
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        `Precision(Test_(u),l_(u),N)` 
+                      </td>
+                      <td>
+                        `:=`
+                      </td>
+                      <td>
+                        `frac(|Top(l_(u),N) \cap Test_(u)|)(N)`
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        `NDCG(Test_(u),N)` 
+                      </td>
+                      <td>
+                        `:=`
+                      </td>
+                      <td>
+                        `frac(DCG(Test_(u),N))(IDCG(N))`
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        `DCG(Test_(u),l_(u),N)` 
+                      </td>
+                      <td>
+                        `:=`
+                      </td>
+                      <td>
+                        `sum_(n=1)^N 1/log_(2)(1+n)  .\Pi (l_(u)(n)  \in Test_(u))`
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        `IDCG(N)` 
+                      </td>
+                      <td>
+                        `:=`
+                      </td>
+                      <td>
+                        `sum_(n=1)^N 1/log_(2)(1+n)`
+                      </td>
+                    </tr>
+                  </table>
                  </div>
-                 <h6>Nilai NDCG = {{nilai_NDCG}}</h6>
               </div>
               <div class="col">
                 <div><div class="cmath fs-6">
-                  `Top(l_(u),N) := {l_(u)(1), ... ,l_(u)(n)}`
-                  `Precision(Test_(u),l_(u),N) := frac(|Top(l_(u),N) \cap Test_(u)|)(N)`
+                  
                  </div>
-                  <h6>Nilai Precision = {{nilai_Precision}}</h6>
                 </div>
               </div>
             </div>
             
             <div class="col">
-            <h4>Definisi:</h4>
-              <div class="col">
-                <ul>
-                  <li>u = target user</li>
-                  <li>N = jumlah rekomendasi</li>
-                  <li>I = daftar hotel</li>
-                  <li>l<sub>u</sub> = data rekomendasi hotel yang sudah terurut secara descending untuk target user u, dimana l<sub>u</sub> &epsilon; I</li>
-                  <li>Top(l<sub>u</sub>, N) = Top-N daftar untuk rekomendasi hotel untuk target user u</li>
-                  <li>Test<sub>u</sub> = data <i>ground-truth</i> dari target user u</li>
-                </ul>
-              </div>
-              <div class="col">
-                <div><div class="cmath fs-6">
-                  `Top(l_(u),N) := {l_(u)(1), ... ,l_(u)(n)}`
-                  `Precision(Test_(u),l_(u),N) := frac(|Top(l_(u),N) \cap Test_(u)|)(N)`
-                 </div>
-                  <h6>Nilai Precision = {{nilai_Precision}}</h6>
-                </div>
+            <h5>Definisi:</h5>
+              <div class="col cmath fs-6">
+                <table>
+                  <tr>
+                    <td>
+                     `u` 
+                    </td>
+                    <td>
+                      =
+                    </td>
+                    <td>
+                      &nbsp;target <i>user</i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      `N`
+                    </td>
+                    <td>
+                      =
+                    </td>
+                    <td>
+                      &nbsp;jumlah rekomendasi
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      `I`
+                    </td>
+                    <td>
+                      =
+                    </td>
+                    <td>
+                      &nbsp;daftar hotel
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      `l_(u)`
+                    </td>
+                    <td>
+                      =
+                    </td>
+                    <td>
+                      &nbsp;data rekomendasi hotel yang sudah terurut secara <i>descending</i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      &nbsp;
+                    </td>
+                    <td>
+                      &nbsp;
+                    </td>
+                    <td>
+                      &nbsp;untuk target <i>user</i> u, dimana `l_(u) \in I`
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      `Top(l_(u),N)`
+                    </td>
+                    <td>
+                      =
+                    </td>
+                    <td>
+                      &nbsp;Top-N daftar rekomendasi hotel untuk target <i>user</i> `u`
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      `Test_(u)`
+                    </td>
+                    <td>
+                      =
+                    </td>
+                    <td>
+                      &nbsp;data <i>ground-truth</i> dari target <i>user</i> `u`
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      `\Pi (x)`
+                    </td>
+                    <td>
+                      =
+                    </td>
+                    <td>
+                      &nbsp;fungsi kondisi yang bernilai 1 jika `x` TRUE dan 0 jika FALSE
+                    </td>
+                  </tr>
+                </table>
               </div>
           </div>
         </div>
@@ -126,15 +252,12 @@
       </section>
       <section id="counts" class="counts section-bg">
         <div class="container">
-          <p class="fs-6">
-            Sumber data: <a href="https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6">(https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6)</a> <br>
-            Detil data: merupakan dataset multi-kriteria yang membahas tentang rating hotel. Dimana dataset yang digunakan dalam penelitian ini sebanyak 25.000 yang terdiri dari 2.595 pengguna, 5.209 item, empat kriteria rating (Overall, Usefull, Funny, Cool).</p>
           <div class="row justify-content-end">
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box border border-info">
                 <span data-purecounter-start="0" data-purecounter-end="{{jml_pelatihan}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
                 <h3 class="text-center">Data Latih</h3>
-                <p class="text-center">(data hotel yang telah diberi rating oleh target user (didapatkan dari dataset) dan untuk digunakan di dalam pemodelan metode)</p>
+                <p class="text-center">(Data hotel yang telah diberi <i>rating</i> oleh target <i>user</i> (didapatkan dari dataset) dan untuk digunakan di dalam pemodelan metode)</p>
                 <br>
                 <ol class="ml-5">
                   {% for x in pelatihan %}
@@ -147,8 +270,8 @@
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box border border-info">
                 <span data-purecounter-start="0" data-purecounter-end="{{jml_rekom}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
-                <h3 class="text-center">Data Hasil Rekomendasi</h3>
-                <p class="text-center">(data hasil rekomendasi untuk target user yang dihasilkan dari pemodelan metode)</p>
+                <h3 class="text-center">Data Rekomendasi</h3>
+                <p class="text-center">(Data hasil rekomendasi untuk target <i>user</i> yang dihasilkan dari pemodelan metode)</p>
                 <br>
                 <ol>
                   {% for y in rekom %}
@@ -161,8 +284,8 @@
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box border border-info">
                 <span data-purecounter-start="0" data-purecounter-end="{{jml_test}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
-                <h3 class="text-center">Data Ground-truth</h3>
-                <p class="text-center">(data test dari target user yang didapatkan dari dataset dan untuk digunakan di dalam evaluasi hasil rekomendasi metode)</p>
+                <h3 class="text-center">Data <i>Ground-truth</i></h3>
+                <p class="text-center">(Data <i>test</i> dari target <i>user</i> yang didapatkan dari dataset dan untuk digunakan di dalam evaluasi hasil rekomendasi metode)</p>
                 <br>
                 <ol>
                   {% for p in test %}
@@ -174,8 +297,8 @@
               <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
                 <div class="count-box border border-info">
                   <span data-purecounter-start="0" data-purecounter-end="{{jml_irisan}}" data-purecounter-duration="2" class="purecounter mt-2"></span>
-                  <h3 class="text-center">Irisan Data (Hasil Rekomendasi & Ground-truth)</h3>
-                  <p class="text-center">(mengukur performa metode sistem rekomendasi berdasarkan metrik Precision dan NDCG, yaitu dengan membandingkan Data Rekomendasi dengan Data <i>Ground-truth</i>)</p>
+                  <h3 class="text-center">Irisan Data</h3>
+                  <p class="text-center">(Hasil irisan antara data rekomendasi dan <i>ground-truth</i>)</p>
                   <br>
                   <ol>
                     {% for q in irisan %}
@@ -193,10 +316,6 @@
   <!-- ======= Footer ======= -->
   {% include 'footer.html' %}
   <!-- End Footer -->
-
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{{ url_for ('static', filename='assets/vendor/aos/aos.js') }}"></script>

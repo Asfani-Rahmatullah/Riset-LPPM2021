@@ -364,7 +364,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-size: 56px;
   font-weight: 700;
-  line-height: 72px;
   color: #124265;
   font-family: "Poppins", sans-serif;
 }
@@ -447,7 +446,6 @@ h1, h2, h3, h4, h5, h6 {
   }
   #hero h1 {
     font-size: 28px;
-    line-height: 36px;
   }
   #hero h2 {
     font-size: 18px;
@@ -1664,3 +1662,14 @@ section {
   font-size: 1.4em;
   height: 1.4em;
 }
+.ket{
+  color: #1e6ca6 !important;
+}
+
+.load {
+  width: 35px;
+  height: 35px;
+  display: none;
+  background: url(/static/loading.gif) no-repeat;
+  cursor: wait;
+  }

@@ -1,6 +1,37 @@
 {% include 'header.html' %}
+<body>
+  <div id="loading" class="load"></div>
+  <div id="content">
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="#">Trunojoyoan</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
+          <li><a class="nav-link scrollto" href="/about">About</a></li>
+          <li><a class="getstarted scrollto" href="#contact">Metode</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-9 text-center">
+          <h1 class="fs-1">Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1><br>
+        </div>
+      </div>
       <div class="text-center">
-        <a href="#contact" class="btn-get-started scrollto">Mulai</a>
+        <a href="#contact" class="btn-get-started scrollto">Metode</a>
       </div>
     </div>
   </section><!-- End Hero -->
@@ -15,21 +46,24 @@
           <h2>METODE</h2>
           <h5>Pilih metode yang anda perlukan.</h5>
         </div>
-
+          <div class="w-75 mx-auto"><p class="text-danger text-center fs-6">Dataset yang digunakan adalah Yelp Dataset (<a href="https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6">https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6</a>), 
+            yaitu dataset multi-kriteria <i>rating</i> hotel dengan kriteria <i>“Overall”</i>, <i>“Useful”</i>, <i>“Funny”</i>, dan <i>“Cool”</i>. Dataset yang digunakan di-<i>filter</i> sehingga hanya menggunakan data dari <i>user</i> yang telah memberi <i>rating</i> 
+            setidaknya 3 buah hotel. Dengan demikian,  jumlah data adalah 25.000 <i>rating</i>, 2.595 <i>user</i>, dan 5.209 hotel. </p>
+          <br></div>
         <div class="row">
           <div class="col-lg-4 col-md-6 d-flex mx-auto mt-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box iconbox-pink">
               <div class="icon">
                 <img src="/static/assets/img/user.png" alt="User" class="w-50">
               </div>
-              <h4><a href="">Min-Max User-Based (MUB)</a></h4>
+              <h4><a href="">MinMax User-Based (MUB)</a></h4>
               <p>Metode Sistem Rekomendasi berbasis Multi-Kriteria yang menerapkan Teknik Normalisasi MinMax dalam Pendekatan <i>User-based Collaborative Filtering</i>
                 </p><br>
               <form action="/" method="POST">
                 <input type="hidden" name="next" value="pilih">
                 <input type="hidden" name="menu" value="10">
-                <input type="hidden" name="metode" value="Min-Max User-Based">
-                <input type="submit" value="Pilih" class="btn btn-primary">
+                <input type="hidden" name="metode" value="MinMax User-Based (MUB)">
+                <input type="submit" value="Pilih" class="btn btn-primary" onclick="loading();">
               </form>
             </div>
           </div>
@@ -39,14 +73,13 @@
               <div class="icon">
                 <img src="/static/assets/img/item.png" alt="Item" class="w-50">
               </div>
-              <h4><a href="">Min-Max Item-Based (MIB)</a></h4>
+              <h4><a href="">MinMax Item-Based (MIB)</a></h4>
               <p>Metode Sistem Rekomendasi berbasis Multi-Kriteria yang menerapkan Teknik Normalisasi MinMax dalam Pendekatan<i> Item-based Collaborative Filtering</i></p><br>
               <form action="/" method="POST">
                 <input type="hidden" name="next" value="pilih">
                 <input type="hidden" name="menu" value="11">
-                <input type="hidden" name="metode" value="Min-Max Item-Based">
-                <input type="hidden" name="penulis" value="Min-Max Item-Based">
-                <input type="submit" value="Pilih" class="btn btn-primary">
+                <input type="hidden" name="metode" value="MinMax Item-Based (MIB)">
+                <input type="submit" value="Pilih" class="btn btn-primary" onclick="loading();">
               </form>
             </div>
           </div>
@@ -58,10 +91,6 @@
   <!-- ======= Footer ======= -->
   {% include 'footer.html' %}<!-- End Footer -->
 
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
   <!-- Vendor JS Files -->
   <script src="{{ url_for ('static', filename='assets/vendor/aos/aos.js') }}"></script>
   <script src="{{ url_for ('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -71,9 +100,15 @@
   <script src="{{ url_for ('static', filename='assets/vendor/purecounter/purecounter.js') }}"></script>
   <script src="{{ url_for ('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
 
+  <script type="text/javascript">// <![CDATA[
+    function loading(){
+        $("#loading").show();
+        $("#content").hide();       
+    }
+// ]]></script>
   <!-- Template Main JS File -->
   <script src="{{ url_for ('static', filename='assets/js/main.js') }}"></script>
-
+</div>
 </body>
 
 </html>

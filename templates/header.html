@@ -8,7 +8,15 @@
   <title>Rekomendasi Hotel</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+  <style>
+    div#loading {
+        width: 35px;
+        height: 35px;
+        display: none;
+        background: url(/static/assets/img/loading.gif) no-repeat;
+        cursor: wait;
+        }
+</style>
   <!-- Favicons -->
   <link href="{{ url_for ('static', filename='assets/img/favicon.png') }}" rel="icon">
   <link href="{{ url_for ('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -35,36 +43,3 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
-
-      <h1 class="logo"><a href="#">Trunojoyoan</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="getstarted scrollto" href="#contact">Mulai</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-      <div class="row justify-content-center">
-        <div class="col-xl-7 col-lg-9 text-center">
-          <h1 class="fs-1">Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1>
-          <h2 class="fs-5">Aplikasi ini adalah prototipe yang mensimulasikan kerja dan analisa dari sistem rekomendasi. Pengguna aplikasi dapat memilih dari kedua metode yang disediakan di dalam sistem untuk menghasilkan Top-N daftar rekomendasi bagi target <i> user.</i> Daftar rekomendasi diperoleh berdasarkan model metode yang dibangun menggunakan Data Latih dari dataset Rating Multi-kriteria Hotel.
-            </h2>
-        </div>
-      </div>
