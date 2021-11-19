@@ -1,6 +1,9 @@
 {% include 'header.html'%}
 <body>
-  <div id="loading" class="load"></div>
+  <div id="proses" class="text-center w-50 border-info position-absolute top-50 start-50 translate-middle">
+    <img src="/static/assets/img/loading.gif" alt="memproses data ..." class="mx-auto my-auto" height="200">
+    <h4 class="text-info text-center"><b>Menyiapkan data ...</b></h4>
+  </div>
   <div id="content">
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
@@ -64,17 +67,40 @@
                   <input type="hidden" name="menu" value="{{menu}}">
                   <input type="hidden" name="next" value="rekom">
                 </div>
-                <p class="text-danger fs-6"><i>Disclaimer</i>: Dataset yang digunakan sangat <i>sparse</i> dan metode evaluasi dilakukan secara <i>offline</i>. 
-                  Oleh karena itu kecenderungan nilai evaluasinya sangatlah rendah (atau bahkan bernilai “0” bagi sejumlah target <i>user</i>), 
-                  karena jumlah hotel yang telah diberi <i>rating</i> oleh target <i>user</i> sangatlah sedikit.</p>
-                <br>
-                <button type="submit" value="Tampilkan Rekomendasi" class="btn btn-primary mx-auto w-25 mt-2">Tampilkan Rekomendasi</button>
+                <p class="text-danger fs-6"><i>Disclaimer</i>: Dataset yang digunakan sangat <i>sparse</i> karena jumlah hotel yang telah diberi <i>rating</i> oleh <i>user</i> sangatlah sedikit. Sedangkan metode evaluasi dilakukan secara <i>offline</i>, yaitu bahwa evaluasi dilakukan dengan membandingkan Data 
+                  Rekomendasi (yang dihasilkan dari pemodelan metode) dengan Data <i>Ground-truth</i> (yang didapatkan dari dataset). Dengan 
+                  demikian, kecenderungan nilai evaluasinya sangatlah rendah (atau bahkan bernilai “0” bagi sejumlah target <i>user</i>),</p>
+                  <div class=" fs-6">
+                  Berikut adalah contoh parameter yang hasil evaluasi rekomendasinya tidak bernilai “0”:
+                  <ul>
+                  {% if metode == 'MinMax User-Based (MUB)'%} <li>Target <i>User</i>: {1, 17, 92, 153, 161, 191, 217, 219, 339, 576}</li>
+                  {% elif metode == 'MinMax Item-Based (MIB)'%} <li>Target <i>User</i>: {139, 268, 527, 726, 749, 831, 850, 945, 1029, 1139}</li>
+                  {% else %}
+                  {% endif %}
+                  <li>Jumlah N: 20</li>
+                  </ul>
                 </div>
+                <button type="submit" value="Tampilkan Rekomendasi" class="btn btn-primary mx-auto w-25 mt-2" id="kirim">Tampilkan Rekomendasi</button>
+                <script>
+                  $(document).ready(function () {
+                    $("#proses").hide();
+
+                    $("#kirim").click(function () {
+                      $("#proses").show();
+                      $("#content").hide();
+                    });
+                    $("#kirim2").click(function () {
+                      $("#proses").show();
+                      $("#content").hide();
+                    });
+                  });
+                </script>
             </form>
           </div>
-        </div>
+          </div>
+          </div>
 
-      </div>
+ 
     </section><!-- End Contact Section -->
   </main><!-- End #main -->
 
@@ -91,7 +117,8 @@
 
   <!-- Template Main JS File -->
   <script src="{{ url_for ('static', filename='assets/js/main.js') }}"></script>
-
+  
+</div>
 </body>
 
 </html>

@@ -28,6 +28,9 @@
   <!-- Template Main CSS File -->
   <link href="{{ url_for ('static', filename='assets/css/style.css') }}" rel="stylesheet">
 
+  
+  <script src="{{ url_for ('static', filename='assets/js/tambah.js') }}"></script>
+
   <!-- =======================================================
   * Template Name: OnePage - v4.6.0
   * Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
@@ -37,6 +40,11 @@
 </head>
 
 <body>
+  <div id="proses" class="text-center w-50 border-info position-absolute top-50 start-50 translate-middle">
+    <img src="/static/assets/img/loading.gif" alt="memproses data ..." class="mx-auto my-auto" height="200">
+    <h4 class="text-info text-center"><b>Menyiapkan data ...</b></h4>
+  </div>
+  <div id="content">
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
@@ -82,7 +90,21 @@
                     <input type="hidden" name="metode" value="{{metode}}">
                     <h4>Target <i>User</i> = {{UTarget}} | Jumlah N = {{topN}}</h4>
                     <p>Metode : {{metode}}</p>
-                    <input type="submit" value="Detail Analisa" class="btn btn-link fs-4 p-0">
+                    <input type="submit" value="Detail Analisa" class="btn btn-link fs-4 p-0" id="kirim">
+                    <script>
+                      $(document).ready(function () {
+                        $("#proses").hide();
+    
+                        $("#kirim").click(function () {
+                          $("#proses").show();
+                          $("#content").hide();
+                        });
+                        $("#kirim2").click(function () {
+                          $("#proses").show();
+                          $("#content").hide();
+                        });
+                      });
+                    </script>
                 </form>
                 <br>
             <div class="count-box border border-info text-center">
@@ -99,15 +121,13 @@
             </div>
             </div>
   
-          </div>
-  
-        </div>
+        
       </section><!-- End Counts Section -->
   </main><!-- End #main -->
   <!-- ======= Footer ======= -->
   {% include 'footer.html' %}
   <!-- End Footer -->
-
+</div>
   <!-- Vendor JS Files -->
   <script src="{{ url_for ('static', filename='assets/vendor/aos/aos.js') }}"></script>
   <script src="{{ url_for ('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -119,7 +139,6 @@
 
   <!-- Template Main JS File -->
   <script src="{{ url_for ('static', filename='assets/js/main.js') }}"></script>
-
 </body>
 
 </html>

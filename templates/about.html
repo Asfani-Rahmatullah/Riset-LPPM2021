@@ -8,7 +8,7 @@
   <title>Rekomendasi Hotel</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Favicons -->
   <link href="{{ url_for ('static', filename='assets/img/favicon.png') }}" rel="icon">
   <link href="{{ url_for ('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -50,7 +50,7 @@
         <ul>
           <li><a class="nav-link scrollto active" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="about">About</a></li>
-          <li><a class="getstarted scrollto" href="#contact">Mulai</a></li>
+          <li><a class="getstarted scrollto" href="/#contact">Metode</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -64,8 +64,7 @@
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
           <h1 class="fs-1">Sistem Rekomendasi Hotel berbasis Multi-Kriteria dengan menerapkan Teknik Normalisasi dalam Pendekatan <i>Collaborative Filtering</i></h1><br>
-          <h4 class="fs-5">Aplikasi ini adalah prototipe yang mensimulasikan kerja dan analisa dari sistem rekomendasi. Pengguna aplikasi dapat memilih dari kedua metode yang disediakan di dalam sistem untuk menghasilkan Top-N daftar rekomendasi bagi target <i> user.</i> Daftar rekomendasi diperoleh berdasarkan model metode yang dibangun menggunakan Data Latih dari dataset Rating Multi-kriteria Hotel.
-            </h4>
+          
         </div>
       </div>
     </div>
@@ -73,132 +72,132 @@
 
   <main id="main">
 
-    <!-- ======= Services Section ======= -->
-    <section id="contact" class="services section-bg">
+    <!-- ======= About Video Section ======= -->
+    <section id="about-video" class="about-video">
       <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>METODE</h2>
-          <h5>Pilih metode yang anda perlukan.</h5>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6 d-flex mx-auto mt-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box iconbox-pink">
-              <div class="icon">
-                <img src="/static/assets/img/user.png" alt="User" class="w-50">
-              </div>
-              <h4><a href="">Min-Max User-Based (MUB)</a></h4>
-              <p>Metode Sistem Rekomendasi berbasis Multi-Kriteria yang menerapkan Teknik Normalisasi MinMax dalam Pendekatan <i>User-based Collaborative Filtering</i>
-                </p><br>
-              <form action="/" method="POST">
-                <input type="hidden" name="next" value="pilih">
-                <input type="hidden" name="menu" value="10">
-                <input type="hidden" name="metode" value="MinMax User-Based">
-                <input type="submit" value="Pilih" class="btn btn-primary">
-              </form>
-            </div>
+        <div class="row mb-2">
+          <div class="mb-5"><h2 class="text-center ket"><b>TENTANG APLIKASI</b></h2></div>
+          <div class="col-lg-6 video-box align-self-baseline" data-aos="fade-right" data-aos-delay="100">
+            <img src="/static/assets/img/sekilas.jpg" class="img-fluid w-50 mx-auto" alt="">
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex mx-auto mt-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box iconbox-yellow">
-              <div class="icon">
-                <img src="/static/assets/img/item.png" alt="Item" class="w-50">
-              </div>
-              <h4><a href="">Min-Max Item-Based (MIB)</a></h4>
-              <p>Metode Sistem Rekomendasi berbasis Multi-Kriteria yang menerapkan Teknik Normalisasi MinMax dalam Pendekatan<i> Item-based Collaborative Filtering</i></p><br>
-              <form action="/" method="POST">
-                <input type="hidden" name="next" value="pilih">
-                <input type="hidden" name="menu" value="11">
-                <input type="hidden" name="metode" value="MinMax Item-Based">
-                <input type="submit" value="Pilih" class="btn btn-primary">
-              </form>
-            </div>
+          <div class="col-lg-6 pt-3 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+            <h3 class="fs-3">Sekilas Mengenai Aplikasi Ini</h3>
+            <p class="fs-5">
+              Aplikasi ini adalah prototipe yang mensimulasikan kerja dan analisa dari sistem rekomendasi. Pengguna aplikasi dapat memilih dari 
+              kedua metode yang disediakan di dalam sistem untuk menghasilkan Top-N daftar rekomendasi bagi target <i> user.</i> Daftar rekomendasi diperoleh 
+              berdasarkan model metode yang dibangun menggunakan Data <i>Training</i> dari dataset <a href="https://www.kaggle.com/yelp-dataset/yelp-dataset/version/6">Rating Multi-kriteria Hotel</a>.
+            </p>
           </div>
 
         </div>
+        <br>
+        <br>
+        <div class="row my-2">
+          <div class="col-lg-6 pt-3 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+            <h3 class="fs-3">Metode Pada Aplikasi Ini</h3>
+            <p class="fs-5">
+              Aplikasi ini menerapkan 2 (dua) metode Sistem Rekomendasi berbasis multi-Kriteria, yaitu:
+            </p>
+            <ol>
+              <li> <b>MinMax User-Based (MUB)</b> <br><b>Referensi:</b> Ifada, N., Sophan, M. K., Putri, N. F. D., and Setyawan, G. E., "A User-Based
+                Normalization Multi-Criteria Rating Approach for Hotel Recommendation System," in
+                <span class="fst-italic">Proceeding of The 2021 International Conference on Sustainable Information
+                  Engineering and Technology (SIET)</span>, Malang (Online), 2021, pp. 151-161. ACM. DOI:
+                <a href="https://doi.org/10.1145/3479645.3479678">https://doi.org/10.1145/3479645.3479678.</a>
+              </li>
+              <li><b>MinMax Item-Based (MIB)</b> <br><b>Referensi:</b> Ifada, N., Sophan, M. K., and Putri, N. F. D., "A MinMax Item-based Method for
+                Multi-Criteria Recommendation Systems," in <span class="fst-italic">Proceeding of The 6th International
+                  Conference on Computer Science and Computational Intelligence (ICCSCI)</span>, Jakarta
+                (Online), 2021, p. [In Press]. IEEE.
+            </li>
+              </ol>
+          </div>
+          <div class="col-lg-6 video-box align-self-baseline" data-aos="fade-right" data-aos-delay="100">
+            <img src="/static/assets/img/metode.jpg" class="img-fluid w-50 mx-auto" alt="">
+          </div>
+
+        </div>
+
       </div>
-    </section><!-- End Sevices Section -->
+    </section><!-- End About Video Section -->
 
         <!-- ======= Team Section ======= -->
         <section id="team" class="team section-bg">
             <div class="container" data-aos="fade-up">
       
               <div class="section-title">
-                <h2>Team</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <h3 class="ket2"><b>Tim Pengembang Aplikasi</b></h3>
               </div>
       
               <div class="row">
       
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-2 col-md-6 d-flex mx-auto" data-aos="fade-up" data-aos-delay="100">
                   <div class="member">
                     <div class="member-img">
-                      <img src="/static/assets/img/team/team.jpg" class="img-fluid" alt="">
+                      <img src="/static/assets/img/team/ibu Ifada.jpg" class="img-fluid" alt="">
                       <div class="social">
-                        <a href=""><i class="bi bi-twitter"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
+                        <a href="mailto:noor.ifada@trunojoyo.ac.id"><i class="fa fa-envelope"></i></a>
                       </div>
                     </div>
                     <div class="member-info">
-                      <h4>Nama</h4>
-                      <span>Tugas</span>
+                      <h4>Noor Ifada</h4>
                     </div>
                   </div>
                 </div>
       
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-2 col-md-6 d-flex mx-auto" data-aos="fade-up" data-aos-delay="200">
                   <div class="member">
                     <div class="member-img">
-                      <img src="/static/assets/img/team/team.jpg" class="img-fluid" alt="">
+                      <img src="/static/assets/img/team/pak Kautsar.jpg" class="img-fluid" alt="">
                       <div class="social">
-                        <a href=""><i class="bi bi-twitter"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
+                        <a href="mailto:ocal_sophan@yahoo.com"><i class="fa fa-envelope"></i></a>
                       </div>
                     </div>
                     <div class="member-info">
-                      <h4>Nama</h4>
-                      <span>Tugas</span>
+                      <h4>Moch Kautsar Sophan</h4>
                     </div>
                   </div>
                 </div>
       
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-lg-2 col-md-6 d-flex mx-auto" data-aos="fade-up" data-aos-delay="300">
                   <div class="member">
                     <div class="member-img">
-                      <img src="/static/assets/img/team/team.jpg" class="img-fluid" alt="">
+                      <img src="/static/assets/img/team/Asfani.jpg" class="img-fluid" alt="">
                       <div class="social">
-                        <a href=""><i class="bi bi-twitter"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
+                        <a href="mailto:asfanirahmat456@gmail.com"><i class="fa fa-envelope"></i></a>
                       </div>
                     </div>
                     <div class="member-info">
-                      <h4>Nama</h4>
-                      <span>Tugas</span>
+                      <h4>Asfani Rahmatullah</h4>
                     </div>
                   </div>
                 </div>
       
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+                <div class="col-lg-2 col-md-6 d-flex mx-auto" data-aos="fade-up" data-aos-delay="400">
                   <div class="member">
                     <div class="member-img">
-                      <img src="/static/assets/img/team/team.jpg" class="img-fluid" alt="">
+                      <img src="/static/assets/img/team/Imam.jpg" class="img-fluid" alt="">
                       <div class="social">
-                        <a href=""><i class="bi bi-twitter"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
+                        <a href="mailto:imamfadhkur1@gmail.com"><i class="fa fa-envelope"></i></a>
                       </div>
                     </div>
                     <div class="member-info">
-                      <h4>Nama</h4>
-                      <span>Tugas</span>
+                      <h4>Imam Fadhkur Rokhim</h4>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 d-flex mx-auto" data-aos="fade-up" data-aos-delay="400">
+                  <div class="member">
+                    <div class="member-img">
+                      <img src="/static/assets/img/team/mbak fitri.jpg" class="img-fluid" alt="">
+                      <div class="social">
+                        <a href="mailto:nurfitrianidp27@gmail.com"><i class="fa fa-envelope"></i></a>
+                      </div>
+                    </div>
+                    <div class="member-info">
+                      <h4>Nur Fitriani Dwi Putri</h4>
                     </div>
                   </div>
                 </div>

@@ -8,15 +8,6 @@
   <title>Rekomendasi Hotel</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  <style>
-    div#loading {
-        width: 35px;
-        height: 35px;
-        display: none;
-        background: url(/static/assets/img/loading.gif) no-repeat;
-        cursor: wait;
-        }
-</style>
   <!-- Favicons -->
   <link href="{{ url_for ('static', filename='assets/img/favicon.png') }}" rel="icon">
   <link href="{{ url_for ('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -32,10 +23,21 @@
   <link href="{{ url_for ('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ url_for ('static', filename='assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ url_for ('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  
+  
+  <script src="{{ url_for ('static', filename='assets/js/tambah.js') }}"></script>
 
   <!-- Template Main CSS File -->
   <link href="{{ url_for ('static', filename='assets/css/style.css') }}" rel="stylesheet">
-
+  <style>
+    div#loading {
+        width: 35px !important;
+        height: 35px !important;
+        display: none !important;
+        background: url(/static/assets/img/loading.gif) no-repeat !important;
+        cursor: wait !important;
+        }
+  </style>
   <!-- =======================================================
   * Template Name: OnePage - v4.6.0
   * Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/

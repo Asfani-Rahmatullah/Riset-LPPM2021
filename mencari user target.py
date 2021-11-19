@@ -194,7 +194,7 @@ class Main3():
         return NDCG
 
 main2 = Main2()
-Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(10)
+Detail_Data_Training, Detail_Data_Test, NamaItem = main2.load_Detail(11)
 for i in range(2954):        
     main3 = Main3(Detail_Data_Training, Detail_Data_Test, NamaItem, 1, i+1, 20)
     Hasil_irisan, Hasil_pelatihan, Hasil_rekom, Hasil_test, nilai_AP, nilai_DCG, nilai_F1Score, nilai_NDCG, nilai_Recall, nilai_Precision = main3.Proses()

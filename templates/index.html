@@ -1,6 +1,9 @@
 {% include 'header.html' %}
 <body>
-  <div id="loading" class="load"></div>
+  <div id="proses" class="text-center w-50 border-info position-absolute top-50 start-50 translate-middle">
+    <img src="/static/assets/img/loading.gif" alt="memproses data ..." class="mx-auto my-auto" height="200">
+    <h4 class="text-info text-center"><b>Menyiapkan data ...</b></h4>
+  </div>
   <div id="content">
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
@@ -35,7 +38,6 @@
       </div>
     </div>
   </section><!-- End Hero -->
-
   <main id="main">
 
     <!-- ======= Services Section ======= -->
@@ -63,7 +65,21 @@
                 <input type="hidden" name="next" value="pilih">
                 <input type="hidden" name="menu" value="10">
                 <input type="hidden" name="metode" value="MinMax User-Based (MUB)">
-                <input type="submit" value="Pilih" class="btn btn-primary" onclick="loading();">
+                <input type="submit" value="Pilih" class="btn btn-primary" id="kirim">
+                <script>
+                  $(document).ready(function () {
+                    $("#proses").hide();
+
+                    $("#kirim").click(function () {
+                      $("#proses").show();
+                      $("#content").hide();
+                    });
+                    $("#kirim2").click(function () {
+                      $("#proses").show();
+                      $("#content").hide();
+                    });
+                  });
+                </script>
               </form>
             </div>
           </div>
@@ -79,14 +95,15 @@
                 <input type="hidden" name="next" value="pilih">
                 <input type="hidden" name="menu" value="11">
                 <input type="hidden" name="metode" value="MinMax Item-Based (MIB)">
-                <input type="submit" value="Pilih" class="btn btn-primary" onclick="loading();">
+                <input type="submit" value="Pilih" class="btn btn-primary" id="kirim2">
               </form>
             </div>
           </div>
 
         </div>
       </div>
-    </section><!-- End Sevices Section -->
+    </section>
+<!-- End Sevices Section -->
   </main><!-- End #main -->
   <!-- ======= Footer ======= -->
   {% include 'footer.html' %}<!-- End Footer -->
@@ -99,13 +116,6 @@
   <script src="{{ url_for ('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
   <script src="{{ url_for ('static', filename='assets/vendor/purecounter/purecounter.js') }}"></script>
   <script src="{{ url_for ('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-
-  <script type="text/javascript">// <![CDATA[
-    function loading(){
-        $("#loading").show();
-        $("#content").hide();       
-    }
-// ]]></script>
   <!-- Template Main JS File -->
   <script src="{{ url_for ('static', filename='assets/js/main.js') }}"></script>
 </div>
