@@ -190,7 +190,7 @@ class Main3():
         return NDCG
 
 pre1 = Main2()
-Detail_Data_Training, Detail_Data_Test, NamaItem = pre1.load_Detail(1)
+Detail_Data_Training, Detail_Data_Test, NamaItem = pre1.load_Detail(10)
 
 
 
